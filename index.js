@@ -1,8 +1,14 @@
-const { makeWASocket, useMultiFileAuthState, fetchLatestBaileysVersion, Browsers } = require("@whiskeysockets/baileys");
+const {
+  makeWASocket,
+  useMultiFileAuthState,
+  fetchLatestBaileysVersion,
+  Browsers
+} = require("@whiskeysockets/baileys");
 const pino = require("pino");
 const qrcode = require("qrcode-terminal");
 const fs = require("fs");
 const path = require("path");
+const http = require("http"); // Tambahan untuk web server
 
 // Load config
 const { channelJid, initialGroupJids, ownerNumbers } = require("./utils/config");
@@ -12,6 +18,14 @@ const { handleMessage } = require("./handlers/message");
 
 const authFolder = "./storage/auth_info";
 if (!fs.existsSync(authFolder)) fs.mkdirSync(authFolder, { recursive: true });
+
+// Web server sederhana untuk UptimeRobot & Render
+http.createServer((req, res) => {
+  res.writeHead(200, { "Content-Type": "text/plain" });
+  res.end("✅ Bot WhatsApp aktif\n");
+}).listen(process.env.PORT || 3000, () => {
+  console.log("🌐 Web server aktif di port", process.env.PORT || 3000);
+});
 
 async function startBot() {
   const { state, saveCreds } = await useMultiFileAuthState(authFolder);
