@@ -1,15 +1,24 @@
 {
-  "name": "nodejs",
+  "name": "whatsapp-bot",
   "version": "1.0.0",
-  "description": "",
+  "description": "Bot WhatsApp berbasis Baileys dengan fitur forward pesan, antilink, dan lainnya",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "whatsapp",
+    "bot",
+    "baileys",
+    "forward",
+    "antilink"
+  ],
+  "author": "ZallMurasaki",
+  "license": "MIT",
   "dependencies": {
-    "@types/node": "^22.13.11"
+    "@whiskeysockets/baileys": "^6.6.0",
+    "fs-extra": "^11.1.1",
+    "pino": "^8.17.0",
+    "qrcode-terminal": "^0.12.0"
   }
 }
